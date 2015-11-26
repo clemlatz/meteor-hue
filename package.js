@@ -1,6 +1,6 @@
 Package.describe({
   name: 'iwazaru:hue',
-  version: '0.1.0',
+  version: '0.1.1',
   summary: 'Control Philips Hue lights with Meteor',
   git: 'https://github.com/iwazaru/meteor-hue.git',
   documentation: 'README.md'
@@ -8,7 +8,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
-  api.use('ecmascript');
+  api.use(['ecmascript', 'http']);
   api.addFiles('bridge.js');
   api.addFiles('light.js');
   api.export('HueBridge', ['client', 'server']);
