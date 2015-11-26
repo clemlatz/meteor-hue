@@ -58,4 +58,18 @@ HueLight.prototype = {
     }
     this.updateState("sat", value);
   },
+
+  /**
+   * Enter color loop mode
+   */
+  startColorloop: function() {
+    this.updateState("effect", "colorloop");
+  },
+
+  /**
+   * Quit color loop mode
+   */
+  stopColorloop: function() {
+    this.updateState("effect", "none");
+  }
 }
