@@ -9,6 +9,7 @@ HueLight.prototype = {
   updateState: function(key, val) {
     let state = {};
     state[key] = val;
+    this.params.state[key] = val;
     this.bridge._apiCall("PUT", `/lights/${this.id}/state`, state);
   },
 
@@ -71,5 +72,28 @@ HueLight.prototype = {
    */
   stopColorloop: function() {
     this.updateState("effect", "none");
+  },
+
+  /**
+   * Make the light blinks
+   * @param  {[int} iterations: the number of times the light should go on and off
+   * @param  {[type]} interval: the time between each iteration
+   */
+  blink: function(iterations, interval) {
+
+    // Default values
+    iterations = iterations || 1;
+    interval = interval || 1000;
+
+    // Do the blink effect
+    this.updateState("alert", "select");
+    iterations -= 1;
+
+    // If this is not the last iteration, call blink() again
+    if (iterations > 0) {
+      setTimeout(() => {
+        this.blink(iterations, interval);
+      }, interval);
+    }
   }
 }
