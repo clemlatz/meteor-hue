@@ -12,18 +12,50 @@ HueLight.prototype = {
     this.bridge._apiCall("PUT", `/lights/${this.id}/state`, state);
   },
 
+  /**
+   * Turns on the light
+   */
   setOn: function() {
     this.updateState("on", true);
   },
 
+  /**
+   * Turns off the light
+   */
   setOff: function() {
     this.updateState("on", false);
   },
 
+  /**
+   * Set the light's brightness
+   * @param  {int} value : the light's brightness from 1 to 254
+   */
   setBrightness: function(value) {
-    if (value < 0 || value > 255 || value !== parseInt(value, 10)) {
-      throw new Meteor.Error(500, value + " is not a valid brightness value. Should be an integer between 0 and 255.");
+    if (value < 1 || value > 254 || value !== parseInt(value, 10)) {
+      throw new Meteor.Error(500, value + ` is not a valid brightness value. Should be an integer between 1 and 254.`);
     }
     this.updateState("bri", value);
+  },
+
+  /**
+   * Set the light's hue (0: red, 25500: green, 46920: blue)
+   * @param  {int} value : the light's hue from 0 to 65535
+   */
+  setHue: function(value) {
+    if (value < 0 || value > 65535 || value !== parseInt(value, 10)) {
+      throw new Meteor.Error(500, value + " is not a valid hue value. Should be an integer between 0 and 65535.");
+    }
+    this.updateState("hue", value);
+  },
+
+  /**
+   * Set the light's saturation
+   * @param  {int} value : the light's saturation from 0 (white) to 254 (colored)
+   */
+  setSaturation: function(value) {
+    if (value < 0 || value > 254 || value !== parseInt(value, 10)) {
+      throw new Meteor.Error(500, value + " is not a valid hue value. Should be an integer between 0 and 254.");
+    }
+    this.updateState("sat", value);
   },
 }
