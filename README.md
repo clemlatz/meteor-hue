@@ -43,7 +43,7 @@ hue.getLight(1, function(light) {
 
 ### HueLight
 
-The `HueLight` object represents a light connected to your bridge. It allow you to update a light's state by sending request through the bridge.
+The `HueLight` object represents a light connected to your bridge. It allow you to change a light's state by sending request through the bridge.
 
 #### Properties
 
@@ -58,8 +58,8 @@ The `HueLight` object represents a light connected to your bridge. It allow you 
 * `.setBrightness(value)`: sets the light's brightness (from 1 to 254)
 * `.setHue(value)`: sets the light's hue (from 0 to 65535)
 * `.setSaturation(value)`: sets the light's saturation (from 0 to 254)
-* `startColorloop()`: makes the light loop through all hue values until `stopColorloop()` is called
-* `blink(iterations, interval)`: makes the light turn on and off each `interval` milliseconds for `iterations` times
+* `.startColorloop()`: makes the light loop through all hue values until `stopColorloop()` is called
+* `.blink(iterations, interval)`: makes the light turn on and off each `interval` milliseconds for `iterations` times
 
 
 ## Examples
@@ -74,19 +74,27 @@ hue.getLights(function(lights) {
 });
 ```
 
-Turn one light on (knowing it's id)
-
+Turn one light on:
 ```
 hue.getLight(1, function(light) {
   light.setOn();
 });
 ```
 
-Set a light's brightness (knowing it's id)
-
+Set a light's brightness:
 ```
 hue.getLight(1, function(light) {
   light.setBrightness(150);
+});
+```
+
+Loop through all colors during half a minute:
+```
+hue.getLight(3, function(light) {
+  light.startColorloop();
+  setTimeout(function() {
+    light.stopColorloop();
+  }, 30000);
 });
 ```
 
