@@ -1,6 +1,6 @@
 Package.describe({
   name: 'iwazaru:hue',
-  version: '0.1.1',
+  version: '0.2.0',
   summary: 'Control Philips Hue lights with Meteor',
   git: 'https://github.com/iwazaru/meteor-hue.git',
   documentation: 'README.md'
