@@ -91,9 +91,9 @@ HueLight.prototype = {
 
     // If this is not the last iteration, call blink() again
     if (iterations > 0) {
-      setTimeout(() => {
+      setTimeout(Meteor.bindEnvironment(function() {
         this.blink(iterations, interval);
-      }, interval);
+      }.bind(this)), interval);
     }
   }
 }
